@@ -1,0 +1,50 @@
+{# Greenfield Task Template - For new features and implementations #}
+## Objective
+
+Implement: **{{ task.title }}**
+
+{% if task.description %}
+{{ task.description }}
+{% else %}
+Create a new {{ task.type }} in the {{ task.domain }} domain. This is a greenfield task requiring new code implementation.
+{% endif %}
+
+**Definition of Done:**
+- Feature is fully implemented and functional
+- Code follows existing project patterns and style
+- No linting errors, type issues, or test failures
+- All changes are committed to branch `{{ branch_name }}`
+- Commit message describes what was implemented
+
+## Constraints
+
+- **Working Directory:** `{{ worktree_path }}`
+- **Branch:** `{{ branch_name }}` (already checked out for you)
+- **Domain:** `{{ task.domain }}`
+
+**Technical Guidelines:**
+- Follow existing code patterns found in the codebase
+- Do NOT modify unrelated files outside the scope of this task
+- Do NOT add unnecessary dependencies
+- Do NOT over-engineer - implement what's needed, nothing more
+- Commit your changes when complete with a clear, descriptive message
+
+{% if task.files %}
+## Reference Files
+
+These files may be helpful for understanding existing patterns:
+{% for f in task.files %}
+- `{{ f }}`
+{% endfor %}
+{% endif %}
+
+{% if domain_patterns %}
+## Domain-Specific Patterns
+
+The following patterns have been learned from previous tasks in this domain:
+
+{{ domain_patterns }}
+{% endif %}
+
+---
+*Task #{{ task.id }} | Worker: {{ worker_id }} | Generated: {{ timestamp }}*

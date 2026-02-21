@@ -1,0 +1,74 @@
+{# Brownfield Task Template - For fixes, refactors, and maintenance #}
+## Objective
+
+{{ task.type | default('Fix') | capitalize }}: **{{ task.title }}**
+
+{% if task.description %}
+{{ task.description }}
+{% else %}
+Apply maintenance to the {{ task.domain }} domain. This is a brownfield task modifying existing code.
+{% endif %}
+
+**Definition of Done:**
+- Issue is resolved completely
+- No regression in existing functionality
+- Changes are minimal and focused on the issue
+- All changes are committed to branch `{{ branch_name }}`
+
+{% if task.error_log %}
+## Previous Attempt Information
+
+This task has been attempted before. Here's what went wrong:
+
+```
+{{ task.error_log[-1].message[:800] }}
+```
+
+**Timestamp:** {{ task.error_log[-1].timestamp }}
+
+⚠️ **Important:** Your solution must avoid this issue. Consider what caused the previous failure and take a different approach if needed.
+{% endif %}
+
+## Constraints
+
+- **Working Directory:** `{{ worktree_path }}`
+- **Branch:** `{{ branch_name }}` (already checked out for you)
+- **Domain:** `{{ task.domain }}`
+- **Retry Count:** {{ task.retry_count | default(0) }} / 3
+
+**Critical Guidelines:**
+- Make **MINIMAL** changes - fix only what's needed
+- Do **NOT** refactor surrounding code unless directly related to the fix
+- Do **NOT** add new features or "improvements"
+- Do **NOT** change formatting or style in unrelated code
+- Preserve existing behavior except for the specific issue being fixed
+- Test your changes to ensure they work
+
+{% if task.files %}
+## Files to Modify
+
+**READ THESE FILES FIRST** before making any changes:
+{% for f in task.files %}
+- `{{ f }}`
+{% endfor %}
+
+Focus your changes on these specific files.
+{% else %}
+## Finding the Issue
+
+No specific files were identified. Search the `{{ task.domain }}` domain for relevant files:
+- Look for files matching the task description
+- Check recent git history for related changes
+- Examine error logs or stack traces if available
+{% endif %}
+
+{% if domain_patterns %}
+## Domain-Specific Patterns
+
+The following patterns have been learned from previous tasks in this domain:
+
+{{ domain_patterns }}
+{% endif %}
+
+---
+*Task #{{ task.id }} | Worker: {{ worker_id }} | Generated: {{ timestamp }}*

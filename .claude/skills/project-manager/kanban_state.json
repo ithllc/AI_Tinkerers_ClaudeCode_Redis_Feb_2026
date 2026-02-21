@@ -1,0 +1,55 @@
+{
+  "version": "1.0.0",
+  "last_updated": null,
+  "session": {
+    "status": "IDLE",
+    "started_at": null,
+    "daily_completed": 0,
+    "total_tokens_used": 0
+  },
+  "config": {
+    "max_workers": 3,
+    "max_retries": 3,
+    "daily_task_limit": 15,
+    "worktree_base": "../worktrees",
+    "graceful_timeout_seconds": 10,
+    "sync_interval_seconds": 30,
+    "active_plan_path": null
+  },
+  "workers": {
+    "worker-1": {
+      "status": "IDLE",
+      "current_task": null,
+      "pid": null,
+      "worktree": null,
+      "tasks_completed": 0
+    },
+    "worker-2": {
+      "status": "IDLE",
+      "current_task": null,
+      "pid": null,
+      "worktree": null,
+      "tasks_completed": 0
+    },
+    "worker-3": {
+      "status": "IDLE",
+      "current_task": null,
+      "pid": null,
+      "worktree": null,
+      "tasks_completed": 0
+    }
+  },
+  "tasks": {
+    "backlog": [],
+    "in_progress": [],
+    "review": [],
+    "done": [],
+    "failed": []
+  },
+  "metrics": {
+    "total_tasks_completed": 0,
+    "total_tasks_failed": 0,
+    "average_task_duration_seconds": 0,
+    "sessions": []
+  }
+}
